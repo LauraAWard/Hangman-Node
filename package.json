@@ -1,0 +1,24 @@
+{
+  "name": "hangman",
+  "version": "1.0.0",
+  "description": "node hangman game",
+  "main": "hangman.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/LauraAWard/Hangman-Node.git"
+  },
+  "author": "laura ward",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/LauraAWard/Hangman-Node/issues"
+  },
+  "homepage": "https://github.com/LauraAWard/Hangman-Node#readme",
+  "dependencies": {
+    "colors": "^1.1.2",
+    "inquirer": "^4.0.0",
+    "request": "^2.83.0"
+  }
+}
