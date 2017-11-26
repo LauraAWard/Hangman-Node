@@ -18,6 +18,8 @@ var currentPlayer;
 
 initGame();
 
+
+
 function initGame() {
 
 	console.log("Welcome to the game of Hangman.")
@@ -51,13 +53,47 @@ function initGame() {
 				    {
 				      type: "list",
 				      message: "Please choose a category:",
-				      choices: ["Thanksgiving", "Mythology", "Hobbies"],
+				      choices: currentGame.getCategoryArray(),
+				      // choices: ["Thanksgiving", "Mythology", "Hobbies"],
 				      name: "category",
 				      default: 0
 				    }
 		  			])
 		  			.then(function(inquirerResponse) {
 		  				currentGame.setCurrCat(inquirerResponse.category);
+		  				// currentGame.getScore();
+		  				// var done = new Promise(function(resolve, reject) {
+		  					currentGame.getWordList();
+		  				// 	if(currentGame.getCurrWord()) {
+		  				// 		resolve(console.log(currentGame.getCurrWord() + "from promise"));
+		  				// 	}
+		  				// 	else {
+		  				// 		var reason = new Error("did not work");
+        //     					reject(reason);
+
+		  				// 	}
+		  				// });
+
+		  				// done.then(function(result) {
+		  				// 	console.log(currentGame.getCurrWord());
+		  				// });
+		  				// currentGame.getWordList();
+		  				// currentGame.getNextWord();
+		  				// currentGame.getCurrWord();
+		  				// currentGame.getNextWord();
+		  				// console.log(currentGame.getCurrWord());
+	  			inquirer
+	  				.prompt([
+				    {
+				      type: "confirm",
+				      message: "Waiting for result",
+				      name: "finally",
+				      default: true
+				    }
+		  			])
+		  			.then(function(inquirerResponse) {
+		  					console.log(currentGame.getCurrWord());
+		  			})
 		  			})
 	  			
 	  			break;

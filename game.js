@@ -1,5 +1,10 @@
 console.log("game is loaded");
 
+var Word = require("./word.js");
+var WordList = require("./wordlist.js");
+var Letter = require("./letter.js");
+
+
 var Game = function() {
 
 
@@ -9,26 +14,26 @@ var Game = function() {
 	this.currentWord = "";
 	//variable to store current category?
 	this.currentCategory = "";
-	//variable to store current player => leave in main?
 	//variable to store current guessed letter
 	this.currentGuess = "";
 	//variable to store current player input command
 	this.currentCommand = "";
 	//variable to store array of guessed letters => put in Word?
-	//variable to store player score
+	//variable to store current player => leave in main?
 	this.player = null;
-	this.playerWins = 0;
-	this.playerLosses = 0;
+	//variable to store player score
+	// this.playerWins = 0;
+	// this.playerLosses = 0;
 	//variable to store player remaining guesses => put in Word, so reinitialzed each new word
 	//variable to store gameplay instructions
 	this.gameInstructions = "This is how to play.";
+	this.currentWordList = null;
+	this.categoryArray = ["Thanksgiving", "Mythology", "Hobbies"];
+
 	//function to test if input is valid character
 	//function to flip character to caps
 	//should inquirer functions go here?
 	//function to set game state to active/ended
-	this.getGameStatus = function() {
-		return this.gameActive;
-	};
 	this.setGameActive = function(bool) {
 		this.gameActive = bool;
 		if(this.gameActive === true) {
@@ -42,8 +47,14 @@ var Game = function() {
 		this.player = player;
 	};
 	//function to return game state
+	this.getGameStatus = function() {
+		return this.gameActive;
+	};
   	//function to update array of guessed letters?
-	//function to keep score
+	//function to display score
+	this.getScore = function() {
+		console.log(this.player.getName() + ", you have won " + this.player.getWins() + " rounds and lost " + this.player.getLosses());
+	};
 	//function to reset score when new round?
 	//function to display game data (category, word, guesses, score, 
 	//hangman)
@@ -60,7 +71,22 @@ var Game = function() {
 		this.currentCategory = category;
 		console.log("The new category is " + this.currentCategory);
 	};
-
+	this.getWordList = function() {
+		this.currentWordList = new WordList(this.getCurrCat());
+		this.currentWord = this.currentWordList.getWords();
+		// console.log(this.currentWord);
+	};
+	this.getNextWord = function() {
+		this.currentWordList.setWordSelected();
+		this.currentWord = this.currentWordList.getWordSelected();
+	};
+	this.getCurrWord = function() {
+		console.log(this.currentWord + "here's the word");
+		return this.currentWord;
+	};
+	this.getCategoryArray = function() {
+		return this.categoryArray;
+	};
 
 };
 

@@ -1,31 +1,63 @@
+var fs = require("fs");
+
 console.log("wordlist is loaded");
-
-categoryArray = [];
-
-//API call to dictionary to assemble categories
-//function to stuff them into categoryArray
-//function to retrieve a random selection for display to player
-//function to return more results for display to player
-
 
 
 var WordList = function(category) {
   
   //variable to store category of wordlist
-  //variable to store array of words not used
-  //variable to store array of words used
+  this.category = category;
+  //variable to store array of words
+  this.wordArray = [];
 
-  //API call to assemble wordlist based on category selected
+  this.wordSelected = "";
+
+  this.getWords = function() {
+     
+      fs.readFile("wordlists/" + this.category + ".txt", "utf8", function(error, data) {
+
+      if (error) {
+        return console.log("There was an error reading the wordlist file: " + error);
+      }
+      //feed words into array, separated at commas
+      this.wordArray = data.split(",");
+          // console.log(this.wordArray);
+          
+      var index = (Math.floor(Math.random() * this.wordArray.length));
+      this.wordSelected = this.wordArray[index]; 
+       console.log(this.wordSelected + "from getWords"); 
+       this.wordArray.splice(index, 1);  
+       return this.wordSelected;
+    });
+  };
+
+  //function to remove words already played from wordlist array
+  this.removeWord = function(word) {
+    var index = this.wordArray.indexOf(word);
+    if(index > -1) {
+      this.wordArray.splice(index, 1);
+    }
+  };
 
   //function to return word from wordlist array
   //can take in difficulty level and category if using
   //this should return the word as string
+  this.setWordSelected = function() {
+    console.log(this.wordArray);
+    var index = (Math.floor(Math.random() * this.wordArray.length));
+    console.log(this.wordArray.length);
+    console.log(index);
+    this.wordSelected = this.wordArray[index];
+    console.log(this.wordSelected);
+    this.removeWord(this.wordSelected);
+  };
 
+  this.getWordSelected = function() {
+    return this.wordSelected;
+  };
 
   //function to determine word difficulty?
   //could be based on length, common letters
-
-  //function to update array of words used?
 
 
 };
