@@ -56,7 +56,8 @@ function initGame() {
 		currentWord = currentGame.getWordObj();
 		currentWord.wordToArray();
 		// currentWord.wordToArray();
-		currentWord.setLetterArray();	
+		currentWord.setLetterArray();
+		currentWord.displayPuzzle();	
 		hangman = currentWord.getHangingMan();
 		// hangman.displayStatus();
 		// hangman.getRemainingGuesses();
@@ -77,21 +78,139 @@ function gamePlay() {
 	  .then(function(inquirerResponse) {
 	  	guess = inquirerResponse.guess.toLowerCase();
 	  	// console.log(guess);
-	  	currentWord.guessCheck(guess);
-	  	if(currentWord.wordCheck()) {
-	  		console.log("Congratulations " + currentPlayer.getName() + ", you've guessed the word!");
-	  	}
-	  	else if(hangman.getRemainingGuesses() === -1) {
-	  		console.log("Sorry " + currentPlayer.getName() + ", you've failed!");
-	  	}
-	  	else {
-	  		gamePlay();
-	  	}
+	  	if(!currentWord.guessCheck(guess)) {
+	  		if(hangman.getRemainingGuesses() > 0) {
+		  		console.log("Incorrect!".bgRed);
+		  		gamePlay();
+	  		}
+	  		else if(hangman.getRemainingGuesses() <= 0) {
+		  		console.log(hangman.displayStatus());
+		  		console.log("Sorry ".yellow + currentPlayer.getName() + ", you've failed!".yellow);
+		  		currentPlayer.addLoss();
+		  		currentGame.getScore();
+		  		inquirer
+				  .prompt([
+				    {
+				      type: "confirm",
+			  		  message: "Would you like to try again?\n",
+			  		  name: "startover", 
+			  		  default: true,
+					},
+				    {
+				      type: "confirm",
+			  		  message: "Would you like to choose a new category?\n",
+			  		  name: "newcategory", 
+			  		  default: false,
+					}
+				  ])
+				  .then(function(inquirerResponse) {
+				  	if(!inquirerResponse.startover) {
+				  		console.log("Goodbye...".yellow);
+				  	}
+				  	else if(inquirerResponse.newcategory) {
+				  		newCategory();
+				  	}
+				  	else if(!inquirerResponse.newcategory) {
+				  		currentGame.getNextWord();
+						currentGame.createWord();
+						currentWord = currentGame.getWordObj();
+						currentWord.wordToArray();
+						currentWord.setLetterArray();
+						currentWord.displayPuzzle();	
+						hangman = currentWord.getHangingMan();
+						gamePlay();
 
+				  	}
+				});
+		  	}
+	  		// else {
+	  		// gamePlay();
+	  		// }
+	  	}
+	  	else if(currentWord.guessCheck(guess)) {
+	  		console.log("Correct!".bgGreen);
+		  	if(currentWord.wordCheck()) {
+		  		console.log(hangman.displayStatus());
+		  		console.log("Congratulations ".bgMagenta + currentPlayer.getName() + ", you've guessed the word!".bgMagenta);
+		  		currentPlayer.addWin();
+		  		currentGame.getScore();
+		  		inquirer
+				  .prompt([
+				    {
+			  		//prompt player for name
+				      type: "confirm",
+			  		  message: "Would you like to play again?\n",
+			  		  name: "startover", 
+			  		  default: true
+					},
+				    {
+				      type: "confirm",
+			  		  message: "Would you like to choose a new category?\n",
+			  		  name: "newcategory", 
+			  		  default: false,
+					}
+				  ])
+				  .then(function(inquirerResponse) {
+				  	if(!inquirerResponse.startover) {
+				  		console.log("Goodbye...".yellow);
+				  	}
+				  	else if(inquirerResponse.newcategory) {
+				  		newCategory();
+				  	}
+				  	else if(!inquirerResponse.newcategory) {
+				  		currentGame.getNextWord();
+						currentGame.createWord();
+						currentWord = currentGame.getWordObj();
+						currentWord.wordToArray();
+						currentWord.setLetterArray();
+						currentWord.displayPuzzle();	
+						hangman = currentWord.getHangingMan();
+						gamePlay();
+				  	}
+				});
+		  	}
+		  	else {
+	  		gamePlay();
+	  		}
+		 }
+
+	  });
+};
+
+function newCategory() {
+	inquirer
+	  .prompt([
+	    {
+  		//prompt player for category
+	      type: "list",
+	      message: "Please choose a category:",
+	      choices: currentGame.getCategoryArray(),
+	      name: "category",
+	      default: 0,
+		}
+	  ])
+	  .then(function(inquirerResponse) {
+		  	// currentPlayer = new Player(inquirerResponse.playername);
+		  	// currentGame.setPlayer(currentPlayer);
+			currentGame.setCurrCat(inquirerResponse.category);
+			currentGame.getWordList();
+			currentGame.getNextWord();
+			currentGame.createWord();
+			currentWord = currentGame.getWordObj();
+			currentWord.wordToArray();
+			// currentWord.wordToArray();
+			currentWord.setLetterArray();
+			currentWord.displayPuzzle();	
+			hangman = currentWord.getHangingMan();
+			// hangman.displayStatus();
+			// hangman.getRemainingGuesses();
+			gamePlay();
 	  });
 
 
 };
+
+
 
   //display gameplay info and allowable commands
   //display current game state (word, score, guesses, category, remaining guesses)

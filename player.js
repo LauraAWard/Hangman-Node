@@ -1,4 +1,4 @@
-console.log("player is loaded");
+// console.log("player is loaded");
 
 var Player = function(name) {
 

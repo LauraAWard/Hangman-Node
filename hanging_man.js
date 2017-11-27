@@ -1,59 +1,13 @@
-console.log("HangingMan is loaded");
+// console.log("HangingMan is loaded");
 
 
 
 var HangingMan = function(category) {
 
 	this.category = category;
-	this.word = "blah";
-	this.ltrGuesses = "blah";
+	this.word = "";
+	this.ltrGuesses = "(  )";
 	this.remaining = 7;
-
-	this.hanging7 = "\n   ___ " + "   Category: " + this.category +	"\n  |  \\|" + 
-					"\n      |" + "   Word: " + this.word + "\n      |" + 
-					"\n      |" + "   Letters Guessed: " + this.ltrGuesses + "\n      |" + 
-					"\n   ___|_" + "  Remaining Guesses: " + this.remaining + "\n";	
-
-	this.hanging6 = "\n   ___ " + "   Category: " + this.category + "\n  |  \\|" + 
-					"\n  o   |" + "   Word: " + this.word + "\n      |" + 
-					"\n      |" + "   Letters Guessed: " + this.ltrGuesses + "\n      |" + 
-					"\n   ___|_" + "  Remaining Guesses: " + this.remaining + "\n";	
-
-	this.hanging5 = "\n   ___ " + "   Category: " + this.category + "\n  |  \\|" + 
-					"\n  o   |" + "   Word: " + this.word + "\n  |   |" + 
-					"\n      |" + "   Letters Guessed: " + this.ltrGuesses + "\n      |" + 
-					"\n   ___|_" + "  Remaining Guesses: " + this.remaining + "\n";	
-
-	this.hanging4 = "\n   ___ " + "   Category: " + this.category + "\n  |  \\|" + 
-					"\n  o   |" + "   Word: " + this.word + "\n \\|   |" + 
-					"\n      |" + "   Letters Guessed: " + this.ltrGuesses + "\n      |" + 
-					"\n   ___|_" + "  Remaining Guesses: " + this.remaining + "\n";	
-
-	this.hanging3 = "\n   ___ " + "   Category: " + this.category + "\n  |  \\|" + 
-					"\n  o   |" + "   Word: " + this.word + "\n \\|/  |" + 
-					"\n      |" + "   Letters Guessed: " + this.ltrGuesses + "\n      |" + 
-					"\n   ___|_" + "  Remaining Guesses: " + this.remaining + "\n";	
-
-	this.hanging2 = "\n   ___ " + "   Category: " + this.category + "\n  |  \\|" + 
-					"\n  o   |" + "   Word: " + this.word + "\n \\|/  |" + 
-					"\n  |   |" + "   Letters Guessed: " + this.ltrGuesses + "\n      |" + 
-					"\n   ___|_" + "  Remaining Guesses: " + this.remaining + "\n";	
-
-	this.hanging1 = "\n   ___ " + "   Category: " + this.category + "\n  |  \\|" + 
-					"\n  o   |" + "   Word: " + this.word + "\n \\|/  |" + 
-					"\n  |   |" + "   Letters Guessed: " + this.ltrGuesses + "\n /    |" + 
-					"\n   ___|_" + "  Remaining Guesses: " + this.remaining + "\n";	
-
-	this.hanging0 = "\n   ___ " + "   Category: " + this.category + "\n  |  \\|" + 
-					"\n  o   |" + "   Word: " + this.word + "\n \\|/  |" + 
-					"\n  |   |" + "   Letters Guessed: " + this.ltrGuesses + "\n / \\  |" + 
-					"\n   ___|_" + "  Remaining Guesses: " + this.remaining + "\n";	
-
-	this.hangingf = "\n   ___ " + "   Category: " + this.category + "\n  |  \\|" + 
-					"\n  o   |" + "   Word: " + this.word + "\n \\|/  |" + 
-					"\n  |   |" + "   Letters Guessed: " + this.ltrGuesses + "\n / \\  |" + 
-					"\n   ___|_" + "  Remaining Guesses: " + this.remaining + 
-					"\n You have failed, enter any key to continue.\n";	
 
 	this.updatePuzzle = function(puzzle) {
 		this.word = puzzle;
@@ -65,87 +19,113 @@ var HangingMan = function(category) {
 
 	this.strikeOne = function() {
 		this.remaining--;
-		console.log("Incorrect");
 	};
 
 	this.getRemainingGuesses = function() {
-		// console.log("remaining guesses");
 		return this.remaining;
 	};
 
 	this.getbadGuesses = function() {
-		console.log(this.ltrGuesses);
 		return this.ltrGuesses;
 
 	};
 	this.getPuzzle = function() {
-		console.log(this.word);
 		return this.word;
 	};
 
 	this.displayStatus = function() {
-		this.ltrGuesses = this.getbadGuesses();
-		this.word = this.getPuzzle();
-
+		var temp = "";
 		switch(this.remaining) {
 
 			case 7:
+			 	var hanging7 = temp.concat("\n   ___    Category: ", this.category, "\n  |  \\|\n      |   Word: ",
+			 				 this.getPuzzle(), "\n      |\n      |   Letters Guessed: ", this.getbadGuesses(), 
+			 				 "\n      |\n   ___|_  Remaining Guesses: ", this.getRemainingGuesses(), "\n");	
 
-			return this.hanging7;
+			return hanging7;
 
 			break;
 
 			case 6:
-			
-			return this.hanging6;
+				var hanging6 = temp.concat("\n   ___    Category: ", this.category, "\n  |  \\|\n  o   |   Word: ",
+							 this.getPuzzle(), "\n      |", "\n      |   Letters Guessed: ", this.getbadGuesses(),
+							  "\n      |\n   ___|_  Remaining Guesses: ", this.getRemainingGuesses(), "\n");
+
+			return hanging6;
 			
 			break;
 
 			case 5:
+				var hanging5 = temp.concat("\n   ___    Category: ", this.category, "\n  |  \\|\n  o   |   Word: ",
+							 this.getPuzzle(), "\n  |   |\n      |   Letters Guessed: ", this.getbadGuesses(),
+							  "\n      |\n   ___|_  Remaining Guesses: ", this.getRemainingGuesses(), "\n");
 			
-			return this.hanging5;
+			return hanging5;
 			
 			break;
 			
 			case 4:
+				var hanging4 = temp.concat("\n   ___    Category: ", this.category, "\n  |  \\|\n  o   |   Word: ",
+							 this.getPuzzle(), "\n \\|   |\n      |   Letters Guessed: ", this.getbadGuesses(),
+							  "\n      |\n   ___|_  Remaining Guesses: ", this.getRemainingGuesses(), "\n");
 			
-			return this.hanging4;
+			return hanging4;
 			
 			break;
 			
 			case 3:
+				var hanging3 = temp.concat("\n   ___    Category: ", this.category, "\n  |  \\|\n  o   |   Word: ",
+							 this.getPuzzle(), "\n \\|/  |\n      |   Letters Guessed: ", this.getbadGuesses(),
+							  "\n      |\n   ___|_  Remaining Guesses: ", this.getRemainingGuesses(), "\n");
 			
-			return this.hanging3;
+			return hanging3;
 			
 			break;
 			
 			case 2:
+				var hanging2 = temp.concat("\n   ___    Category: ", this.category, "\n  |  \\|\n  o   |   Word: ",
+							 this.getPuzzle(), "\n \\|/  |\n  |   |   Letters Guessed: ", this.getbadGuesses(),
+							  "\n      |\n   ___|_  Remaining Guesses: ", this.getRemainingGuesses(), "\n");
 			
-			return this.hanging2;
+			return hanging2;
 			
 			break;
 			
 			case 1:
+				var hanging1 = temp.concat("\n   ___    Category: ", this.category, "\n  |  \\|\n  o   |   Word: ",
+							 this.getPuzzle(), "\n \\|/  |\n  |   |   Letters Guessed: ", this.getbadGuesses(),
+							  "\n /    |\n   ___|_  Remaining Guesses: ", this.getRemainingGuesses(), "\n");
 			
-			return this.hanging1;
+			return hanging1;
 			
 			break;
 			
 			case 0:
+				var hanging0 = temp.concat("\n   ___    Category: ", this.category, "\n  |  \\|\n  o   |   Word: ",
+				 			this.getPuzzle(), "\n \\|/  |\n  |   |   Letters Guessed: ", this.getbadGuesses(),
+				  			"\n / \\  |\n   ___|_  Remaining Guesses: ", this.getRemainingGuesses(), "\n");
 			
-			return this.hanging0;
+			return hanging0;
 			
 			break;
 			
 			case -1:
+				var hangingfail = temp.concat("\n   ___    Category: ", this.category, "\n  |  \\|\n  o   |   Word: ",
+								 this.getPuzzle(), "\n \\|/  |\n  |   |   Letters Guessed: ", this.getbadGuesses(),
+								 "\n / \\  |\n   ___|_  Remaining Guesses: ", this.getRemainingGuesses(), 
+								 "\n You have failed, enter any key to continue.\n");
 			
-			return this.hangingf;
+			return hangingfail;
 			
 			break;
 			
 			default:
-			
-			return this.hangingf;
+				var hangingfail = temp.concat("\n   ___    Category: ", this.category, "\n  |  \\|\n  o   |   Word: ",
+					 			this.getPuzzle(), "\n \\|/  |\n  |   |   Letters Guessed: ", this.getbadGuesses(),
+					 			"\n / \\  |\n   ___|_  Remaining Guesses: ", this.getRemainingGuesses(), 
+								 "\n You have failed, enter any key to continue.\n");
+
+			return hangingfail;
 			
 		}
 

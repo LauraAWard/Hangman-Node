@@ -1,4 +1,4 @@
-console.log("word is loaded");
+// console.log("word is loaded");
 
 var Letter = require("./letter.js");
 var HangingMan = require("./hanging_man.js");
@@ -57,7 +57,7 @@ var Word = function(word, category) {
   		} 		
   	}
   	this.hangingMan.updatePuzzle(puzzle);
-  	console.log(puzzle);
+  	// console.log(puzzle);
   };
 
   //function to cycle through letter object array and match
@@ -100,7 +100,7 @@ var Word = function(word, category) {
   	// var guesses = "(" + this.badGuesses.join(", ") + ")";
 	guesses = guesses.concat("(", this.badGuesses.join(", "), ")");
   	this.hangingMan.updateGuesses(guesses);
-  	console.log(guesses);
+  	// console.log(guesses);
   };
 
   this.getHangingMan = function() {

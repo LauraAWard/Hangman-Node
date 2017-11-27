@@ -1,4 +1,4 @@
-console.log("letter is loaded");
+// console.log("letter is loaded");
 
 var Letter = function(letter) {
 

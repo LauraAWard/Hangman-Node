@@ -1,4 +1,4 @@
-console.log("game is loaded");
+// console.log("game is loaded");
 
 var fs = require("fs");
 var Word = require("./word.js");
@@ -58,7 +58,7 @@ var Game = function() {
  	//function to update array of guessed letters?
 	//function to display score
 	this.getScore = function() {
-		console.log(this.player.getName() + ", you have won " + this.player.getWins() + " rounds and lost " + this.player.getLosses());
+		console.log(this.player.getName() + ", you have won ".cyan + this.player.getWins() + " rounds and lost ".cyan + this.player.getLosses());
 	};
 	//function to reset score when new round?
 	//function to display game data (category, word, guesses, score, 
