@@ -22,6 +22,7 @@ var Game = function() {
 	//variable to store array of guessed letters => put in Word?
 	//variable to store current player => leave in main?
 	this.player = null;
+	this.wordObj = null;
 	//variable to store player score
 	// this.playerWins = 0;
 	// this.playerLosses = 0;
@@ -44,14 +45,17 @@ var Game = function() {
 			console.log("The game has ended");
 		}
 	};
-	this.setPlayer = function(player) {
-		this.player = player;
-	};
 	//function to return game state
 	this.getGameStatus = function() {
 		return this.gameActive;
 	};
-  	//function to update array of guessed letters?
+	this.setPlayer = function(player) {
+		this.player = player;
+	};
+ 	this.getPlayer = function() {
+		return this.player;
+	};
+ 	//function to update array of guessed letters?
 	//function to display score
 	this.getScore = function() {
 		console.log(this.player.getName() + ", you have won " + this.player.getWins() + " rounds and lost " + this.player.getLosses());
@@ -79,46 +83,21 @@ var Game = function() {
 				this.currentWordList = WordList.options[i].words;
 			}
 		}
-		// this.currentWordList = WordList(this.getCurrCat());
-		// this.currentWord = this.currentWordList.getWords();
-		console.log(this.currentWordList);
+		// console.log(this.currentWordList);
 	};
-	// this.getNextWord = function() {
-	// 	this.currentWordList.setWordSelected();
-	// 	this.currentWord = this.currentWordList.getWordSelected();
-	// };
 	this.getCurrWord = function() {
-		console.log(this.currentWord + "here's the word");
+		// console.log(this.currentWord + "here's the word");
 		return this.currentWord;
 	};
 	this.setCategoryArray = function() {
 		for(i = 0; i < WordList.options.length; i++) {
 			this.categoryArray.push(WordList.options[i].category);
 		}
-		console.log(this.categoryArray);
+		// console.log(this.categoryArray);
 	};
 	this.getCategoryArray = function() {
 		return this.categoryArray;
 	};
-
-	// this.createWordList = function() {
-		 
-	// 	fs.readFile("wordlists/" + this.currentCategory + ".txt", "utf8", function(error, data) {
-
-	// 	    if (error) {
-	// 	      return console.log("There was an error reading the wordlist file: " + error);
-	// 	    }
- //      //feed words into array, separated at commas
- //      		this.currentWordList = data.split(",");
- //          // console.log(this.wordArray);
- //          	// this.setWordSelected();
- //      var index = (Math.floor(Math.random() * this.currentWordList.length));
- //      this.currentWord = this.currentWordList[index]; 
- //       console.log(this.currentWord + "from create wordlist"); 
- //       this.currentWordList.splice(index, 1);  
- //       return this.currentWord;
- //    	});
-	// };
 	this.removeWord = function(word) {
 	    var index = this.currentWordList.indexOf(word);
 	    if(index > -1) {
@@ -126,15 +105,19 @@ var Game = function() {
 	    }
   	};
   	this.getNextWord = function() {
-	    console.log(this.currentWordList);
 	    var index = (Math.floor(Math.random() * this.currentWordList.length));
-	    console.log(this.currentWordList.length);
-	    console.log(index);
 	    this.currentWord = this.currentWordList[index];
-	    console.log(this.currentWord + "from getNextWord");
+	    // console.log(this.currentWord + "from getNextWord");
 	    this.removeWord(this.currentWord);
  	};
-
+ 	this.createWord = function() {
+ 		this.wordObj = new Word(this.currentWord, this.currentCategory);
+ 		// console.log("createWord");
+ 	};
+ 	this.getWordObj = function() {
+ 		// console.log("return this.wordObj");
+ 		return this.wordObj;
+ 	};
 
 };
 

@@ -86,7 +86,5 @@ var WordList = {
   
   };
 
-// console.log(WordList.options[0].category);
-
 
 module.exports = WordList;
