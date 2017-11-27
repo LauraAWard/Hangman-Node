@@ -1,5 +1,7 @@
  // console.log("wordlist is loaded");
 
+//Wordlist object to be retrived by game based on category
+//initially wanted to pull from API or file read
 var WordList = {
 
   options: [

@@ -2,37 +2,48 @@
 
 var colors = require("colors");
 
+//hanging man object constructor function
 var HangingMan = function(category) {
 
 	this.category = category; 
 	this.word = "";
 	this.ltrGuesses = "(  )";
-	this.remaining = 7;
+	//remaining guesses, always starts with 7 for number of hanging man body parts
+	this.remaining = 7; 
 
+	//function called by word object to pass puzzle data 
 	this.updatePuzzle = function(puzzle) {
 		this.word = puzzle;
 	};
 
+	//function called by word object to pass guessed letter data
 	this.updateGuesses = function(guesses) {
 		this.ltrGuesses = guesses;
 	};
 
+	//function to decrement remaining guesses
 	this.strikeOne = function() {
 		this.remaining--;
 	};
 
+	//function to return remaining guesses count
 	this.getRemainingGuesses = function() {
 		return this.remaining;
 	};
 
+	//function to return bad guesses string
 	this.getbadGuesses = function() {
 		return this.ltrGuesses;
 
 	};
+	
+	//function to return puzzle word (with unguessed letters hidden for display)
 	this.getPuzzle = function() {
 		return this.word;
 	};
 
+	//function to display hanging man based on remaining guesses, as well as
+	//word category, word puzzle, bad guesses and remaining guesses
 	this.displayStatus = function() {
 		var temp = "";
 		switch(this.remaining) {

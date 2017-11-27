@@ -1,10 +1,11 @@
  // console.log("letter is loaded");
 
+//letter object constructor function
 var Letter = function(letter) {
 
 	//boolean variable for show/hide
 	this.show = false; 
-	//variable to store actual letter value
+	//variable to store actual letter/character value
 	this.value = letter;
 	//default value for puzzle display
 	this.default = "_";
