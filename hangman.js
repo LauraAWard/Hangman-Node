@@ -63,7 +63,7 @@ function initGame() {
 		  				currentGame.setCurrCat(inquirerResponse.category);
 		  				// currentGame.getScore();
 		  				// var done = new Promise(function(resolve, reject) {
-		  					currentGame.getWordList();
+		  					console.log(currentGame.createWordList() + "from main");
 		  				// 	if(currentGame.getCurrWord()) {
 		  				// 		resolve(console.log(currentGame.getCurrWord() + "from promise"));
 		  				// 	}
@@ -75,25 +75,25 @@ function initGame() {
 		  				// });
 
 		  				// done.then(function(result) {
-		  				// 	console.log(currentGame.getCurrWord());
+		  					// console.log(temp + "from main");
 		  				// });
 		  				// currentGame.getWordList();
 		  				// currentGame.getNextWord();
 		  				// currentGame.getCurrWord();
 		  				// currentGame.getNextWord();
 		  				// console.log(currentGame.getCurrWord());
-	  			inquirer
-	  				.prompt([
-				    {
-				      type: "confirm",
-				      message: "Waiting for result",
-				      name: "finally",
-				      default: true
-				    }
-		  			])
-		  			.then(function(inquirerResponse) {
-		  					console.log(currentGame.getCurrWord());
-		  			})
+	  			// inquirer
+	  			// 	.prompt([
+				  //   {
+				  //     type: "confirm",
+				  //     message: "Waiting for result",
+				  //     name: "finally",
+				  //     default: true
+				  //   }
+		  		// 	])
+		  		// 	.then(function(inquirerResponse) {
+		  		// 			console.log(currentGame.getCurrWord());
+		  		// 	})
 		  			})
 	  			
 	  			break;

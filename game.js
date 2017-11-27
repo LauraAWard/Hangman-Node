@@ -1,5 +1,6 @@
 console.log("game is loaded");
 
+var fs = require("fs");
 var Word = require("./word.js");
 var WordList = require("./wordlist.js");
 var Letter = require("./letter.js");
@@ -27,7 +28,7 @@ var Game = function() {
 	//variable to store player remaining guesses => put in Word, so reinitialzed each new word
 	//variable to store gameplay instructions
 	this.gameInstructions = "This is how to play.";
-	this.currentWordList = null;
+	this.currentWordList = [];
 	this.categoryArray = ["Thanksgiving", "Mythology", "Hobbies"];
 
 	//function to test if input is valid character
@@ -71,15 +72,15 @@ var Game = function() {
 		this.currentCategory = category;
 		console.log("The new category is " + this.currentCategory);
 	};
-	this.getWordList = function() {
-		this.currentWordList = new WordList(this.getCurrCat());
-		this.currentWord = this.currentWordList.getWords();
-		// console.log(this.currentWord);
-	};
-	this.getNextWord = function() {
-		this.currentWordList.setWordSelected();
-		this.currentWord = this.currentWordList.getWordSelected();
-	};
+	// this.getWordList = function() {
+	// 	this.currentWordList = new WordList(this.getCurrCat());
+	// 	this.currentWord = this.currentWordList.getWords();
+	// 	// console.log(this.currentWord);
+	// };
+	// this.getNextWord = function() {
+	// 	this.currentWordList.setWordSelected();
+	// 	this.currentWord = this.currentWordList.getWordSelected();
+	// };
 	this.getCurrWord = function() {
 		console.log(this.currentWord + "here's the word");
 		return this.currentWord;
@@ -87,6 +88,41 @@ var Game = function() {
 	this.getCategoryArray = function() {
 		return this.categoryArray;
 	};
+
+	this.createWordList = function() {
+		 
+		fs.readFile("wordlists/" + this.currentCategory + ".txt", "utf8", function(error, data) {
+
+		    if (error) {
+		      return console.log("There was an error reading the wordlist file: " + error);
+		    }
+      //feed words into array, separated at commas
+      		this.currentWordList = data.split(",");
+          // console.log(this.wordArray);
+          	// this.setWordSelected();
+      var index = (Math.floor(Math.random() * this.currentWordList.length));
+      this.currentWord = this.currentWordList[index]; 
+       console.log(this.currentWord + "from create wordlist"); 
+       this.currentWordList.splice(index, 1);  
+       return this.currentWord;
+    	});
+	};
+	this.removeWord = function(word) {
+	    var index = this.currentWordList.indexOf(word);
+	    if(index > -1) {
+	      this.currentWordList.splice(index, 1);
+	    }
+  	};
+  	this.getNextWord = function() {
+	    console.log(this.currentWordList);
+	    var index = (Math.floor(Math.random() * this.currentWordList.length));
+	    console.log(this.currentWordList.length);
+	    console.log(index);
+	    this.currentWord = this.currentWordList[index];
+	    console.log(this.currentWord + "from getNextWord");
+	    this.removeWord(this.currentWord);
+ 	};
+
 
 };
 
