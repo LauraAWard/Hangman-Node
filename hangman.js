@@ -1,16 +1,15 @@
 //import packages
 var inquirer = require("inquirer");
-//process.stdout.isTTY = true;  //might need this
 var colors = require("colors");
 var request = require("request");
 var fs = require("fs");
 
 //get data from file
-var Word = require("./word.js");
-var WordList = require("./wordlist.js");
-var Letter = require("./letter.js");
-var Player = require("./player.js");
-var Game = require("./game.js");
+var Word = require("./supporting_files/word.js");
+// var WordList = require("./supporting_files/wordlist.js");
+// var Letter = require("./supporting_files/letter.js");
+var Player = require("./supporting_files/player.js");
+var Game = require("./supporting_files/game.js");
 
 var currentGame = new Game();
 var currentWord;
@@ -18,11 +17,11 @@ var currentPlayer;
 var hangman;
 var guess;
 
-initGame();
+initializeGame();
 
 
 
-function initGame() {
+function initializeGame() {
 
 	console.log("Welcome to the game of Hangman.")
 	currentGame.howToPlay();
@@ -55,12 +54,9 @@ function initGame() {
 		currentGame.createWord();
 		currentWord = currentGame.getWordObj();
 		currentWord.wordToArray();
-		// currentWord.wordToArray();
 		currentWord.setLetterArray();
 		currentWord.displayPuzzle();	
 		hangman = currentWord.getHangingMan();
-		// hangman.displayStatus();
-		// hangman.getRemainingGuesses();
 		gamePlay();
 
 	  });
@@ -77,7 +73,6 @@ function gamePlay() {
 	    }	  ])
 	  .then(function(inquirerResponse) {
 	  	guess = inquirerResponse.guess.toLowerCase();
-	  	// console.log(guess);
 	  	if(!currentWord.guessCheck(guess)) {
 	  		if(hangman.getRemainingGuesses() > 0) {
 		  		console.log("Incorrect!".bgRed);
@@ -123,9 +118,6 @@ function gamePlay() {
 				  	}
 				});
 		  	}
-	  		// else {
-	  		// gamePlay();
-	  		// }
 	  	}
 	  	else if(currentWord.guessCheck(guess)) {
 	  		console.log("Correct!".bgGreen);
@@ -137,7 +129,6 @@ function gamePlay() {
 		  		inquirer
 				  .prompt([
 				    {
-			  		//prompt player for name
 				      type: "confirm",
 			  		  message: "Would you like to play again?\n",
 			  		  name: "startover", 
@@ -190,32 +181,21 @@ function newCategory() {
 		}
 	  ])
 	  .then(function(inquirerResponse) {
-		  	// currentPlayer = new Player(inquirerResponse.playername);
-		  	// currentGame.setPlayer(currentPlayer);
 			currentGame.setCurrCat(inquirerResponse.category);
 			currentGame.getWordList();
 			currentGame.getNextWord();
 			currentGame.createWord();
 			currentWord = currentGame.getWordObj();
 			currentWord.wordToArray();
-			// currentWord.wordToArray();
 			currentWord.setLetterArray();
 			currentWord.displayPuzzle();	
 			hangman = currentWord.getHangingMan();
-			// hangman.displayStatus();
-			// hangman.getRemainingGuesses();
 			gamePlay();
 	  });
 
 
 };
 
-
-
-  //display gameplay info and allowable commands
-  //display current game state (word, score, guesses, category, remaining guesses)
-  //display hangman graphic (separate constructor?)
-  //prompt player for guesses
-  //prompt player when game lost/won
-  //ask player if continuing game
-  //ask player if changing category/difficulty level?
+	//function to test if input is valid character
+	//function to flip character to caps
+  	//display gameplay info and allowable commands

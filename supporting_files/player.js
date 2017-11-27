@@ -1,11 +1,13 @@
-// console.log("player is loaded");
+ // console.log("player is loaded");
 
 var Player = function(name) {
 
 	//variable to store player name
 	this.name = name;
+ 
 	//variable to store player password
 	this.password = "";
+
 	//variable to store player difficulty setting?
 	this.wins = 0;
 	this.losses = 0;

@@ -1,30 +1,33 @@
-// console.log("word is loaded");
+ // console.log("word is loaded");
 
 var Letter = require("./letter.js");
 var HangingMan = require("./hanging_man.js");
 
 
-var Word = function(word, category) {
+var Word = function(word, category) { 
   
 
   //variable to store word as string
   this.wordString = word;
+
   this.wordCategory = category;
+
   this.wordArray = [];
-  // this.puzzle = "";
-  // this.guesses = "";
+
   //variable to store array of letter objects
   this.letterArray = [];
+
   //variable to store array of incorrect guessed letters
   this.badGuesses = [];
+
   //variable for hanging man display object
   this.hangingMan = new HangingMan(this.wordCategory);
 
   //function to turn word string into array
   this.wordToArray = function() {
   	this.wordArray = this.wordString.split("");
-  	// console.log("wordToArray");
   };
+
   //function to set word string value
   this.setWord = function(word) {
   	this.wordString = word;
@@ -39,7 +42,6 @@ var Word = function(word, category) {
   			this.letterArray[i].revealLetter();
   		}
   	}
-  	// console.log("setLetterArray");
   };
 
   //function to cycle through letter object array and display 
@@ -48,16 +50,13 @@ var Word = function(word, category) {
   	var puzzle = "";
   	for(i = 0; i < this.letterArray.length; i++) {
   		if(this.letterArray[i].show) {
-  			// console.log(this.letterArray[i].value + " ");
   			puzzle += this.letterArray[i].value + " ";
   		}
   		else {
-  			// console.log(this.letterArray[i].default + " ");
   			puzzle += this.letterArray[i].default + " ";
   		} 		
   	}
   	this.hangingMan.updatePuzzle(puzzle);
-  	// console.log(puzzle);
   };
 
   //function to cycle through letter object array and match
@@ -79,6 +78,7 @@ var Word = function(word, category) {
   	this.displayBadGuesses();
   	return match;
   };
+
   this.wordCheck = function() {
    	var complete = false;
    	var revealed = 0;
@@ -92,15 +92,12 @@ var Word = function(word, category) {
   	}
   	return complete;
   };
+
 //function to display incorrectly guessed letters
   this.displayBadGuesses = function() {
   	var guesses = "";
-  		// console.log("(" + this.badGuesses.join(" ") + ")");
-  	// this.guesses = "";
-  	// var guesses = "(" + this.badGuesses.join(", ") + ")";
 	guesses = guesses.concat("(", this.badGuesses.join(", "), ")");
   	this.hangingMan.updateGuesses(guesses);
-  	// console.log(guesses);
   };
 
   this.getHangingMan = function() {
