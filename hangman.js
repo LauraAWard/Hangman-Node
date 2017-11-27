@@ -44,7 +44,8 @@ function initGame() {
 
 	  	currentPlayer = new Player(inquirerResponse.playername);
 	  	currentGame.setPlayer(currentPlayer);
-
+	  	currentGame.setCategoryArray();
+	  	
 	  	switch(inquirerResponse.action) {
 	  		case "Play new game":
 	  			console.log("Starting new game");
@@ -61,9 +62,10 @@ function initGame() {
 		  			])
 		  			.then(function(inquirerResponse) {
 		  				currentGame.setCurrCat(inquirerResponse.category);
+		  				// console.log(WordList.options[0].category);
 		  				// currentGame.getScore();
 		  				// var done = new Promise(function(resolve, reject) {
-		  					console.log(currentGame.createWordList() + "from main");
+		  					// console.log(currentGame.createWordList() + "from main");
 		  				// 	if(currentGame.getCurrWord()) {
 		  				// 		resolve(console.log(currentGame.getCurrWord() + "from promise"));
 		  				// 	}
@@ -77,9 +79,9 @@ function initGame() {
 		  				// done.then(function(result) {
 		  					// console.log(temp + "from main");
 		  				// });
-		  				// currentGame.getWordList();
-		  				// currentGame.getNextWord();
-		  				// currentGame.getCurrWord();
+		  				currentGame.getWordList();
+		  				currentGame.getNextWord();
+		  				currentGame.getCurrWord();
 		  				// currentGame.getNextWord();
 		  				// console.log(currentGame.getCurrWord());
 	  			// inquirer

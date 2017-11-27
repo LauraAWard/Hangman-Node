@@ -29,7 +29,7 @@ var Game = function() {
 	//variable to store gameplay instructions
 	this.gameInstructions = "This is how to play.";
 	this.currentWordList = [];
-	this.categoryArray = ["Thanksgiving", "Mythology", "Hobbies"];
+	this.categoryArray = [];
 
 	//function to test if input is valid character
 	//function to flip character to caps
@@ -72,11 +72,17 @@ var Game = function() {
 		this.currentCategory = category;
 		console.log("The new category is " + this.currentCategory);
 	};
-	// this.getWordList = function() {
-	// 	this.currentWordList = new WordList(this.getCurrCat());
-	// 	this.currentWord = this.currentWordList.getWords();
-	// 	// console.log(this.currentWord);
-	// };
+	this.getWordList = function() {
+		for(i = 0; i < WordList.options.length; i++) {
+
+			if(WordList.options[i].category === this.getCurrCat()) {
+				this.currentWordList = WordList.options[i].words;
+			}
+		}
+		// this.currentWordList = WordList(this.getCurrCat());
+		// this.currentWord = this.currentWordList.getWords();
+		console.log(this.currentWordList);
+	};
 	// this.getNextWord = function() {
 	// 	this.currentWordList.setWordSelected();
 	// 	this.currentWord = this.currentWordList.getWordSelected();
@@ -85,28 +91,34 @@ var Game = function() {
 		console.log(this.currentWord + "here's the word");
 		return this.currentWord;
 	};
+	this.setCategoryArray = function() {
+		for(i = 0; i < WordList.options.length; i++) {
+			this.categoryArray.push(WordList.options[i].category);
+		}
+		console.log(this.categoryArray);
+	};
 	this.getCategoryArray = function() {
 		return this.categoryArray;
 	};
 
-	this.createWordList = function() {
+	// this.createWordList = function() {
 		 
-		fs.readFile("wordlists/" + this.currentCategory + ".txt", "utf8", function(error, data) {
+	// 	fs.readFile("wordlists/" + this.currentCategory + ".txt", "utf8", function(error, data) {
 
-		    if (error) {
-		      return console.log("There was an error reading the wordlist file: " + error);
-		    }
-      //feed words into array, separated at commas
-      		this.currentWordList = data.split(",");
-          // console.log(this.wordArray);
-          	// this.setWordSelected();
-      var index = (Math.floor(Math.random() * this.currentWordList.length));
-      this.currentWord = this.currentWordList[index]; 
-       console.log(this.currentWord + "from create wordlist"); 
-       this.currentWordList.splice(index, 1);  
-       return this.currentWord;
-    	});
-	};
+	// 	    if (error) {
+	// 	      return console.log("There was an error reading the wordlist file: " + error);
+	// 	    }
+ //      //feed words into array, separated at commas
+ //      		this.currentWordList = data.split(",");
+ //          // console.log(this.wordArray);
+ //          	// this.setWordSelected();
+ //      var index = (Math.floor(Math.random() * this.currentWordList.length));
+ //      this.currentWord = this.currentWordList[index]; 
+ //       console.log(this.currentWord + "from create wordlist"); 
+ //       this.currentWordList.splice(index, 1);  
+ //       return this.currentWord;
+ //    	});
+	// };
 	this.removeWord = function(word) {
 	    var index = this.currentWordList.indexOf(word);
 	    if(index > -1) {
