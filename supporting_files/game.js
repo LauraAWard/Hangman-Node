@@ -32,7 +32,7 @@ var Game = function() {
 	this.wordObj = null;
 
 	//variable to store gameplay instructions
-	this.gameInstructions = "You will be presented with a hidden word, represented by a row a of dashes, based on the category chosen. Try to guess the word by typing a single letter at a time.  If the letter chosen is on the word, that letter will be revealed in the word.  If not, the letter will be added to a list of bad guesses so that you do not select it again.  Each time you guess a letetr that is not in the word, the hanging man will grow.  Try to guess the entire word before you run out of guesses!";
+	this.gameInstructions = "You will be presented with a hidden word, represented by a row a of dashes, based on the category chosen. Try to guess the word by typing a single letter at a time.  If the letter chosen is in the word, that letter will be revealed in the puzzle.  If not, the letter will be added to a list of bad guesses so that you do not select it again.  Each time you guess a letter that is not in the word, the hanging man will grow.  Try to guess the entire word before you run out of guesses!";
 	
 	//array to store current wordlist
 	this.currentWordList = [];

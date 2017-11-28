@@ -59,7 +59,7 @@ var HangingMan = function(category) {
 
 			case 6:
 				var hanging6 = temp.concat("\n   ___    Category: ".cyan, this.category, "\n  |  \\|\n  o   |   Word: ".cyan,
-							 this.getPuzzle(), "\n      |", "\n      |   Letters Guessed: ".cyan, this.getbadGuesses(),
+							 this.getPuzzle(), "\n      |\n      |   Letters Guessed: ".cyan, this.getbadGuesses(),
 							  "\n      |\n   ___|_  Remaining Guesses: ".cyan, this.getRemainingGuesses(), "\n");
 
 			return hanging6;

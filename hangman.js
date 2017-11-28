@@ -27,7 +27,7 @@ initializeGame();
 //function to initialize and start game
 function initializeGame() {
 
-	console.log("Welcome to the game of Hangman.".random)
+	console.log("Welcome to the game of Hangman.".zebra)
 	//display game instructions
 	currentGame.howToPlay();
 	//read file to get wordlist categories
